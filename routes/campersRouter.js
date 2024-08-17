@@ -2,7 +2,7 @@ import express from "express";
 import {
     getAllCampers,
     getOneCamper
-} from "../controllers/campersControllers";
+} from "../controllers/campersControllers.js";
 
 const campersRouter = express.Router();
 
