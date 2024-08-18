@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import camperServices from "../services/camperServices.js";
 
 export function getAllCampers(req, res, next) {
@@ -15,6 +16,7 @@ export function getAllCampers(req, res, next) {
     })
     .catch((err) => next(err));
 };
+
   
 export function getOneCamper(req, res, next) {
     const { id } = req.params;
@@ -41,4 +43,43 @@ export function getOneCamper(req, res, next) {
         });
 };
 
+
+export function removeFavoriteCamper(req, res, next) {
+    const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid ObjectId format" });
+    }
+
+    camperServices
+        .deleteFavoriteCamper(id)
+        .then((camper) => {
+                if (camper === null) {
+                 console.log("Camper not found");
+                return res.status(404).json({ message: "Not found" });
+            }
+            res.status(200).json(camper);
+        })
+    .catch((err) => next(err));
+};
+
+
+export function addFavoriteCamper(req, res, next) {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid ObjectId format" });
+    }
+
+    camperServices
+        .favoriteCamper(id)
+        .then((camper) => {
+            if (camper === null) {
+                console.log("Camper not found");
+                return res.status(404).json({ message: "Not found" });
+            }
+            res.status(200).json({ message: "Camper added to favorites", camper });
+        })
+        .catch((err) => next(err));
+};
     

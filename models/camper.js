@@ -38,7 +38,8 @@ const camperSchema = new mongoose.Schema({
         reviewer_name: { type: String, required: true },
         reviewer_rating: { type: Number, required: true },
         comment: { type: String, required: true }
-    }]
+    }],
+    isFavorite: { type: Boolean, default: false } 
 });
 
 const Camper = mongoose.model("Camper", camperSchema);

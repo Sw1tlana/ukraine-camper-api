@@ -20,15 +20,51 @@ async function getCampers(filter, page, limit) {
 async function getCamper(camperId) {
     try {
       const camper = await Camper.findById(camperId);
-      console.log(JSON.stringify(camper, null, 2)); 
+    
         return camper;
     } catch (error) {
         throw error;    
     }
 };
 
+async function favoriteCamper(id) {
+    try {
+        const camper = await Camper.findById(id);
+        if (!camper) {
+            return null;
+        }
+        camper.isFavorite = true; 
+       await camper.save();
+      
+      return camper;
+      
+    } catch (error) {
+      throw error;
+    }
+}
+
+async function deleteFavoriteCamper(id) {
+
+    try {
+        const camper = await Camper.findById(id);
+        if (!camper) {
+            return null;
+      }
+      
+      camper.isFavorite = false; 
+      await camper.save();
+      return camper;
+      
+    } catch (error) {
+        throw error;
+    }
+  
+};
+
 
 export default {
-    getCampers,
-    getCamper
+  getCampers,
+  getCamper,
+  favoriteCamper,
+  deleteFavoriteCamper
 }
