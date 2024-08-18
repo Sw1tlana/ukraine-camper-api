@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import camperServices from "../services/camperServices.js";
 
 export function getAllCampers(req, res, next) {
-    let { page = 1, limit = 20, favorite } = req.query;
+    let { page = 1, limit = 4, favorite } = req.query;
     
     page = parseInt(page, 10);
     limit = parseInt(limit, 10);
@@ -21,8 +21,6 @@ export function getAllCampers(req, res, next) {
 export function getOneCamper(req, res, next) {
     const { id } = req.params;
 
-        console.log("Received ID:", id);
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ message: "Invalid ObjectId format" });
     }
@@ -31,14 +29,11 @@ export function getOneCamper(req, res, next) {
         .getCamper(id)
         .then((camper) => {
             if (camper === null) {
-                 console.log("Camper not found");
                 return res.status(404).json({ message: "Not found" });
             }
-             console.log("Camper found:", camper);
               res.status(200).json(camper);
         })
         .catch((error) => {
-            console.error("Error fetching camper:", error); 
             next(error)
         });
 };
@@ -55,7 +50,6 @@ export function removeFavoriteCamper(req, res, next) {
         .deleteFavoriteCamper(id)
         .then((camper) => {
                 if (camper === null) {
-                 console.log("Camper not found");
                 return res.status(404).json({ message: "Not found" });
             }
             res.status(200).json(camper);
@@ -75,7 +69,6 @@ export function addFavoriteCamper(req, res, next) {
         .favoriteCamper(id)
         .then((camper) => {
             if (camper === null) {
-                console.log("Camper not found");
                 return res.status(404).json({ message: "Not found" });
             }
             res.status(200).json({ message: "Camper added to favorites", camper });
