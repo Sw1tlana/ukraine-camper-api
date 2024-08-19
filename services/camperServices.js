@@ -61,23 +61,9 @@ async function deleteFavoriteCamper(id) {
   
 };
 
-async function findCampersByLocation(location) {
-  try {
-    
-    const regex = new RegExp(location, 'i');
-    const campers = await Camper.find({ location: regex });
-
-    return campers;
-  } catch (error) {
-    throw error;
-  }
-}
-
-
 export default {
   getCampers,
   getCamper,
   favoriteCamper,
-  deleteFavoriteCamper,
-  findCampersByLocation
+  deleteFavoriteCamper
 }

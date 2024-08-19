@@ -5,6 +5,7 @@ import morgan from "morgan";
 
 import campersRouter from "./routes/campersRouter.js";
 import bookingsRouter from "./routes/bookingsRouter.js";
+import searchRouter from "./routes/locationRouter.js";
 
 import "./db.js";
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use("/api/campers", campersRouter);
 app.use("/api/bookings", bookingsRouter);
+app.use("/api/search", searchRouter);
 
 
 app.use((_, res) => {
