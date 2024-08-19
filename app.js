@@ -4,7 +4,7 @@ import "dotenv/config";
 import morgan from "morgan";
 
 import campersRouter from "./routes/campersRouter.js";
-import bookingsRouter from "./routes/bokingsRouter.js";
+import bookingsRouter from "./routes/bookingsRouter.js";
 
 import "./db.js";
 

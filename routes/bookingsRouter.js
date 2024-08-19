@@ -1,5 +1,5 @@
 import express from "express";
-import { addBooking } from "../controllers/bookingsController";
+import { addBooking } from "../controllers/bookingsController.js";
 import validateBody from "../helpers/validateBody.js";
 import { createBookingSchema } from "../schemas/bookingSchema.js";
 

@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-import { createBookingSchema } from "../schemas/bookingSchema";
-import bookingsServices from "../services/bookingsServices";
+import { createBookingSchema } from "../schemas/bookingSchema.js";
+import bookingsServices from "../services/bookingsServices.js";
 
 export function addBooking(req, res, next) {
     const { error, value } = createBookingSchema.validate(req.body);
@@ -8,11 +7,7 @@ export function addBooking(req, res, next) {
     if (error) {
     return res.status(400).json({ error: error.details[0].message });
     }
-    
-      if (!mongoose.Types.ObjectId.isValid(req.body.id)) {
-    return res.status(400).json({ message: "Invalid ObjectId format" });
-    }
-    
+   
     bookingsServices
     .createBooking(value)
     .then((newBooking) => {

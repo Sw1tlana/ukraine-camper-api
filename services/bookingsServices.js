@@ -1,8 +1,8 @@
-import Booking from "../models/booking";
+import Booking from "../models/booking.js";
 
-async function createBooking (bookingDate) {
+async function createBooking (bookingData) {
     try {
-        const booking = new Booking(bookingDate);
+        const booking = new Booking(bookingData);
         await booking.save();
         return booking;
 
