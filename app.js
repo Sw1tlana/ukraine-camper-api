@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import morgan from "morgan";
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 import campersRouter from "./routes/campersRouter.js";
 import bookingsRouter from "./routes/bookingsRouter.js";
@@ -17,7 +18,12 @@ app.use(morgan("tiny"));
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use('/favicon.ico', (req, res) => {
+    res.sendStatus(204); 
+});
 
 app.get("/", (req, res) => {
     res.send("Welcome to the Ukraine Camper API.");
