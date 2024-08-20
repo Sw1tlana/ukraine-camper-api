@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import morgan from "morgan";
+import path from 'path';
 
 import campersRouter from "./routes/campersRouter.js";
 import bookingsRouter from "./routes/bookingsRouter.js";
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(morgan("tiny"));
 
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
     res.send("Welcome to the Ukraine Camper API.");
