@@ -16,6 +16,10 @@ app.use(morgan("tiny"));
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+    res.send("Welcome to the Ukraine Camper API.");
+});
+
 app.use("/api/campers", campersRouter);
 app.use("/api/bookings", bookingsRouter);
 app.use("/api/search", searchRouter);
