@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
     res.send("Welcome to the Ukraine Camper API.");
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 app.use("/api/campers", campersRouter);
 app.use("/api/bookings", bookingsRouter);
 app.use("/api/search", searchRouter);
